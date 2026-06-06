@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overlay Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand__logo">◈</div>
+        <div class="brand__name">Overlay<span>Manager</span></div>
+      </div>
+      <nav class="nav">
+        <button class="nav__item active" data-tab="dashboard"><span class="nav__ico">▦</span> Дашборд</button>
+        <button class="nav__item" data-tab="alerts"><span class="nav__ico">✦</span> Алерты</button>
+        <button class="nav__item" data-tab="currency"><span class="nav__ico">🪙</span> Валюта</button>
+        <button class="nav__item" data-tab="users"><span class="nav__ico">☷</span> Пользователи</button>
+      </nav>
+      <div class="sidebar__foot">
+        <a class="overlay-link" id="overlay-link" href="/overlay" target="_blank">/overlay → OBS</a>
+        <button class="btn btn--ghost btn--sm" id="copy-overlay">Скопировать ссылку</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__title" id="tab-title">Дашборд</div>
+        <div class="status" id="sb-status">
+          <span class="status__dot"></span>
+          <span class="status__text">Streamer.bot: …</span>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="tab active" id="tab-dashboard">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-card__label">Пользователей</div>
+            <div class="stat-card__value" id="stat-users">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Валюты в обороте</div>
+            <div class="stat-card__value" id="stat-circulating">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Всего начислено</div>
+            <div class="stat-card__value" id="stat-earned">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__label">Streamer.bot</div>
+            <div class="stat-card__value" id="stat-conn">—</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head">
+            <h3>Лента событий</h3>
+            <span class="muted" id="feed-count">0 событий</span>
+          </div>
+          <div class="feed" id="feed">
+            <div class="feed__empty">Пока нет событий. Они появятся, когда придут с Twitch через Streamer.bot.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ALERTS -->
+      <section class="tab" id="tab-alerts">
+        <div class="panel__intro">
+          Включай/выключай алерты, меняй текст и длительность. Кнопка «Тест» отправит алерт на оверлей в OBS.
+        </div>
+        <div class="alerts-grid" id="alerts-grid"></div>
+      </section>
+
+      <!-- CURRENCY -->
+      <section class="tab" id="tab-currency">
+        <div class="panel">
+          <div class="panel__head"><h3>Настройки валюты</h3></div>
+          <div class="form-grid">
+            <label>Название валюты
+              <input type="text" id="cur-name" />
+            </label>
+            <label>Символ / эмодзи
+              <input type="text" id="cur-symbol" maxlength="4" />
+            </label>
+            <label>Начисление в минуту (активным в чате)
+              <input type="number" id="cur-perminute" min="0" />
+            </label>
+            <label>Окно активности (минут)
+              <input type="number" id="cur-window" min="1" />
+            </label>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel__head"><h3>Награды за события</h3></div>
+          <div class="form-grid" id="reward-grid"></div>
+          <div class="panel__actions">
+            <button class="btn btn--primary" id="save-currency">Сохранить</button>
+            <span class="save-hint" id="currency-saved"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- USERS -->
+      <section class="tab" id="tab-users">
+        <div class="panel">
+          <div class="panel__head users-head">
+            <h3>Пользователи и балансы</h3>
+            <div class="users-tools">
+              <input type="search" id="user-search" placeholder="Поиск по нику…" />
+              <button class="btn btn--ghost btn--sm" id="user-add">+ Добавить</button>
+              <button class="btn btn--ghost btn--sm" id="user-refresh">⟳</button>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th data-sort="username">Пользователь</th>
+                <th data-sort="balance" class="num">Баланс</th>
+                <th data-sort="total_earned" class="num">Всего</th>
+                <th data-sort="last_active">Активность</th>
+                <th class="actions-col">Действия</th>
+              </tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+          </table>
+          <div class="table__empty" id="users-empty" hidden>Пользователей пока нет.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
