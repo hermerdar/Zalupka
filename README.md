@@ -40,6 +40,12 @@ Manager:  http://localhost:4848/
 Overlay:  http://localhost:4848/overlay   <- добавить как OBS Browser Source
 ```
 
+## Быстрый запуск на Windows (без команд)
+
+1. Установи **Node.js** LTS с https://nodejs.org (галочку «Add to PATH» оставь включённой).
+2. Скачай проект: на странице репозитория **Code → Download ZIP** и распакуй (например, в `E:\Zalupka`).
+3. Дважды кликни по **`start.bat`** — он сам создаст `.env`, поставит зависимости (один раз) и запустит приложение. Окно не закрывай, пока стримишь.
+
 ## Настройка Streamer.bot
 
 1. В Streamer.bot открой **Servers/Clients → WebSocket Server** и включи его (Enabled).
