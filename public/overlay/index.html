@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overlay</title>
+  <link rel="stylesheet" href="overlay.css" />
+</head>
+<body>
+  <div id="stage">
+    <div id="alert" class="alert" aria-live="polite">
+      <div class="alert__glow"></div>
+      <div class="alert__icon"><span id="alert-emoji">🎉</span></div>
+      <div class="alert__body">
+        <div class="alert__label" id="alert-label">Alert</div>
+        <div class="alert__text" id="alert-text"></div>
+      </div>
+      <div class="alert__sheen"></div>
+    </div>
+  </div>
+  <audio id="alert-audio"></audio>
+  <script src="overlay.js"></script>
+</body>
+</html>
